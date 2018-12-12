@@ -18,10 +18,10 @@ class CreatePassesTable extends Migration
             $table->string('name');
             $table->string('department');
             $table->string('car_number');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('relation');
-            $table->integer('status');
-
+            $table->integer('status')->default(0);
+            $table->string('made_data')->default('-1');
             $table->timestamps();
         });
     }

@@ -59,6 +59,30 @@ class TokenService
         }
         return $tokenStr;
     }
+    public function verifyToken($tokenStr)
+    {
+        $res = $this->getToken($tokenStr);
+        if($res == null)
+            return -1;
+        else{
+            $time = new Carbon();
+            if ($res->expires_at > $time) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+    public function getToken($tokenStr)
+    {
+        return DB::table('tokens')->where('token',$tokenStr)->first();
+    }
 
+    public function getUserByToken($tokenStr)
+    {
+        $tokenInfo = $this->getToken($tokenStr);
+        $userInfo=DB::table('users')->where('id',$tokenInfo->user_id)->select('id','name','role')->first();
+        return $userInfo;
+    }
 
 }

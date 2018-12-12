@@ -10,6 +10,7 @@ Route::group([
     'prefix' => 'user'
 ],function (){
     Route::post('register','UserController@register');
-    Route::post('login','UserController@login');
+    Route::post('loginweb','UserController@login')->middleware('auditor');
+    Route::post('loginapp','UserController@login')->middleware('scanner');
 
 });

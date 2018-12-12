@@ -35,4 +35,10 @@ class UserService
             return $user->id;
     }
 
+    public function getUserRole($id)
+    {
+        $role = DB::table('users')->where('id',$id)->value('role');
+        return $role;
+    }
+
 }

@@ -9,3 +9,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 include 'Routes/User.php';
+include 'Routes/Pass.php';

@@ -58,6 +58,10 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
+        'scanner' => \App\Http\Middleware\ScannerMiddleware::class,
+        'auditor' => \App\Http\Middleware\AuditorMiddleware::class,
+        'token' => \App\Http\Middleware\TokenMiddleware::class,
+
         'cors'                  => \App\Http\Middleware\Cors::class,
     ];
 }
