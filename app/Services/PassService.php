@@ -37,6 +37,12 @@ class PassService
         return 0;
     }
 
+    public function getInfoByCarNumber($carNumber)
+    {
+        $car = DB::table('passes')->select('id','name','department','car_number','phone')->where('car_number',$carNumber)->get();
+        return $car;
+    }
+
     public function examine($ids)
     {
         foreach ($ids as $id)

@@ -79,4 +79,14 @@ class PassController extends Controller
             'code'  =>  0
         ]);
     }
+
+    public function getInfoByCarNumber(Request $request)
+    {
+        $data = $this->passService->getInfoByCarNumber($request->car_number);
+        return response([
+            'code'  =>  0,
+            'data'  =>  $data
+        ]);
+    }
+
 }
