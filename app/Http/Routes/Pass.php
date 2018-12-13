@@ -20,6 +20,7 @@ Route::group([
     ],function(){
         Route::get('getpasses/{limit}/{offset}','PassController@getPasses');
         Route::post('examine','PassController@examine');
+        Route::post('reject','PassController@deletePasses');
     });
 
 

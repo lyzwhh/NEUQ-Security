@@ -44,8 +44,8 @@ class PassController extends Controller
         else
         {
             return response([
-                'code'      =>  '301',
-                'message'   =>  '该车牌已经提交过'
+                'code'      =>  '2001',
+                'message'   =>  '该车牌已经通过审核'
             ]);
         }
 
@@ -68,6 +68,13 @@ class PassController extends Controller
     public function examine(Request $request)
     {
         $this->passService->examine($request->ids);
+        return response([
+            'code'  =>  0
+        ]);
+    }
+    public function deletePasses(Request $request)
+    {
+        $this->passService->deletePasses($request->ids);
         return response([
             'code'  =>  0
         ]);

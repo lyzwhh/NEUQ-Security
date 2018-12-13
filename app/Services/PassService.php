@@ -17,18 +17,24 @@ class PassService
         $car = DB::table('passes')->where('car_number',$applyInfo['car_number'])->first();
         if ($car != null)
         {
-            return -1;
+            if ($car->status == 1)
+            {
+                return -1;
+            }
+            else
+            {
+                DB::table('passes')->where('car_number',$applyInfo['car_number'])->delete();
+            }
         }
-        else
-        {
-            $time = Carbon::now();
-            $info = array_merge($applyInfo,[
-                'created_at' =>  $time,
-                'updated_at'    =>  $time
-            ]);
-            DB::table('passes')->insert($info);
-            return 0;
-        }
+
+
+        $time = Carbon::now();
+        $info = array_merge($applyInfo,[
+            'created_at' =>  $time,
+            'updated_at'    =>  $time
+        ]);
+        DB::table('passes')->insert($info);
+        return 0;
     }
 
     public function examine($ids)
@@ -36,6 +42,14 @@ class PassService
         foreach ($ids as $id)
         {
             DB::table('passes')->where('id',$id)->update(['status'  =>  1]);
+        }
+    }
+
+    public function deletePasses($ids)
+    {
+        foreach ($ids as $id)
+        {
+            DB::table('passes')->where('id',$id)->delete();
         }
     }
 
