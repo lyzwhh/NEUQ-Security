@@ -20,8 +20,8 @@ class Cors
             return $response;
         }
         $response->headers->set('Access-Control-Allow-Origin' , '*');
-        $response->headers->set('Access-Control-Allow-Headers', '*');
-        $response->headers->set('Access-Control-Allow-Methods', '*');
+        $response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Cookie, Accept,token,tokenId,token_type,Accept,X-Requested-With');
+        $response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PATCH,DELETE,PUT, OPTIONS');
         $response->headers->set('Access-Control-Allow-Credentials', 'true');
         return $response;
     }
