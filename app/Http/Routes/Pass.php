@@ -28,6 +28,7 @@ Route::group([
         'middleware' => ['token','scanner']
     ],function(){
         Route::post('search','PassController@getInfoByCarNumber');
+        Route::post('getQRcode','PassController@getQRCode');
     });
 
 

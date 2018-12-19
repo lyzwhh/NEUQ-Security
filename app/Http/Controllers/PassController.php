@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\PassService;
 use App\Pass;
+use Carbon\Carbon;
 class PassController extends Controller
 {
     //
@@ -103,6 +104,14 @@ class PassController extends Controller
             'code'  =>  0,
             'data'  =>  $data
         ]);
+    }
+
+    public function getQRCode(Request $request)
+    {
+        $data = $this->passService->getQRCode($request->ids);
+        $time = Carbon::now();
+        $name = '二维码'.$time.'zip';
+        return response()->download($data,$name)->deleteFileAfterSend(true);
     }
 
 }

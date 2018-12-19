@@ -9,6 +9,10 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Filesystem\Filesystem;
+use Chumper\Zipper\Zipper;
+
 
 class PassService
 {
@@ -59,11 +63,30 @@ class PassService
         }
     }
 
-    public function createQRCode($ids)
+    public function getQRCode($ids)
     {
+        $file = new Filesystem();
+        $file->cleanDirectory('QRCodes');
+
         foreach ($ids as $id)
         {
+            $pass = DB::table('passes')->where('id',$id)->first();
+            if ($pass == null)
+            {
+                continue;
+            }
+
+            $info = $pass->car_number;
+            $fileName = $pass->name.' '.$info;
+            QrCode::format('png')->size(1000)->generate($info, '../public/QRCodes/'.$fileName.'.png');
 
         }
+
+        $zipper = new Zipper();
+        $public_path = 'QRCodes/';
+        $arr = glob(public_path($public_path));
+        $zipper->make(public_path('zips/QRcodes.zip'))->add($arr)->close();
+
+        return public_path('zips/QRcodes.zip');
     }
 }
