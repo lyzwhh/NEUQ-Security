@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'pass'
 ],function (){
+
     Route::post('apply','PassController@apply');
 
 
@@ -18,7 +19,6 @@ Route::group([
         'middleware' => ['token','auditor']
         //TODO : 测试
     ],function(){
-        Route::get('getpasses/{limit}/{offset}','PassController@getPasses');
         Route::post('examine','PassController@examine');
         Route::post('reject','PassController@deletePasses');
     });
@@ -30,5 +30,12 @@ Route::group([
         Route::post('search','PassController@getInfoByCarNumber');
     });
 
+
+    Route::group([
+        'middleware' => ['token']
+    ],function(){
+        Route::get('getpasses/{limit}/{offset}','PassController@getPasses');
+        Route::get('getcheckedpasses/{limit}/{offset}','PassController@getCheckedPasses');
+    });
 
 });

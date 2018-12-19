@@ -65,6 +65,22 @@ class PassController extends Controller
             'data'  =>  $passes
         ]);
     }
+
+    public function getCheckedPass(int $limit,int $offset)
+    {
+        $passes = $this->passTable
+            ->select('id','name','department','car_number','phone','relation')
+            ->orderBy('created_at')
+            ->offset($offset)
+            ->where('status',1)
+            ->limit($limit)
+            ->get();
+        return response([
+            'code'  =>  '0',
+            'data'  =>  $passes
+        ]);
+    }
+
     public function examine(Request $request)
     {
         $this->passService->examine($request->ids);

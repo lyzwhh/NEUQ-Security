@@ -59,4 +59,11 @@ class PassService
         }
     }
 
+    public function createQRCode($ids)
+    {
+        foreach ($ids as $id)
+        {
+
+        }
+    }
 }
