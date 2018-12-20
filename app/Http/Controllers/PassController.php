@@ -110,7 +110,7 @@ class PassController extends Controller
     {
         $data = $this->passService->getQRCode($request->ids);
         $time = Carbon::now();
-        $name = '二维码'.$time.'zip';
+        $name = '二维码'.$time.'.zip';
         return response()->download($data,$name)->deleteFileAfterSend(true);
     }
 
