@@ -67,7 +67,7 @@ class PassController extends Controller
         ]);
     }
 
-    public function getCheckedPass(int $limit,int $offset)
+    public function getCheckedPasses(int $limit,int $offset)
     {
         $passes = $this->passTable
             ->select('id','name','department','car_number','phone','relation')
