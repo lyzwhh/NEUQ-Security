@@ -78,7 +78,14 @@ class PassService
 
             $info = $pass->car_number;
             $fileName = $pass->name.' '.$info;
-            QrCode::format('png')->size(1000)->generate($info, '../public/QRCodes/'.$fileName.'.png');
+            QrCode::format('png')->size(1000)->merge('/public/logo.png',.3)->errorCorrection('H')->generate($info, '../public/QRCodes/'.$fileName.'.png');
+
+            $dst_path = 'QRCodes/'.$fileName.'.png';
+            $img = imagecreatefromstring(file_get_contents($dst_path));
+            $font = 'font/simhei.ttf';
+            $black = imagecolorallocate($img, 0x00, 0x00, 0x00);//字体颜色
+            imagefttext($img, 33, 0, 0, 33, $black, $font, $info);
+            imagepng($img,'QRCodes/'.$fileName.'.png');
 
         }
 

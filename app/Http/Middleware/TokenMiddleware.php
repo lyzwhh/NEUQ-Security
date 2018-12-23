@@ -40,6 +40,8 @@ class TokenMiddleware
         else
         {
             $userInfo = $this->tokenService->getUserByToken($request->header('token'));  //add id name role
+
+            //TODO : wrong &$ useless  , $request is a array
             $request->user = $userInfo;
             return $next($request);
         }
