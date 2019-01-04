@@ -107,6 +107,7 @@ class PassService
 //        $zipper->make(public_path('zips/QRcodes.zip'))->add($arr)->close();
         $public_path = 'QRCodes\\';
         $arr = array();
+        $arr[0] = null;
         $arr = glob(public_path($public_path));
         self::zipDir($arr[0],'zips/QRcodes.zip');
 
