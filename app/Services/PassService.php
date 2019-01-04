@@ -44,7 +44,7 @@ class PassService
 
     public function getInfoByCarNumber($carNumber)
     {
-        $car = DB::table('passes')->select('id','name','department','car_number','phone','status','made_date')->where('car_number',$carNumber)->get();
+        $car = DB::table('passes')->select('id','name','department','car_number','phone','status')->where('car_number',$carNumber)->get();
         return $car;
     }
 
