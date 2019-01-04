@@ -100,17 +100,21 @@ class PassController extends Controller
     public function getInfoByCarNumber(Request $request)
     {
         $data = $this->passService->getInfoByCarNumber($request->car_number);
-        if ($data == null)
+        if (sizeof($data) == 0)
         {
             return response([
                 'code'  =>  2001,
                 'message'   =>  '车牌未提交申请'
             ]);
         }
-        return response([
-            'code'  =>  0,
-            'data'  =>  $data
-        ]);
+        else
+        {
+            return response([
+                'code'  =>  0,
+                'data'  =>  $data
+            ]);
+        }
+
     }
 
     public function getQRCode(Request $request)
