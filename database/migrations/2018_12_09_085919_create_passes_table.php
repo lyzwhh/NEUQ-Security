@@ -21,7 +21,7 @@ class CreatePassesTable extends Migration
             $table->string('phone');
             $table->string('relation');
             $table->integer('status')->default(0);
-            $table->string('made_data')->default('-1');
+            $table->string('made_date')->default('-1');
             $table->timestamps();
         });
     }

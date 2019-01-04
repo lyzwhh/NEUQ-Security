@@ -100,6 +100,13 @@ class PassController extends Controller
     public function getInfoByCarNumber(Request $request)
     {
         $data = $this->passService->getInfoByCarNumber($request->car_number);
+        if ($data == null)
+        {
+            return response([
+                'code'  =>  2001,
+                'message'   =>  '车牌未提交申请'
+            ]);
+        }
         return response([
             'code'  =>  0,
             'data'  =>  $data

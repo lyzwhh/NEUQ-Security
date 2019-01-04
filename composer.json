@@ -11,7 +11,9 @@
         "laravel/tinker": "~1.0",
         "simplesoftwareio/simple-qrcode": "~2",
         "chumper/zipper": "1.0.x",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "ext-iconv": "*",
+        "ext-zip": "*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
