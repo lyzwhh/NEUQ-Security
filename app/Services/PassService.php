@@ -90,7 +90,7 @@ class PassService
 
             $info = $pass->car_number;
             $fileName = $pass->name.' '.$info;
-            $fileName = iconv('UTF-8', 'GB18030', $fileName);
+            $fileName = iconv('UTF-8', 'GBK', $fileName);
             QrCode::format('png')->encoding('UTF-8')->size(1000)->merge('/public/logo.png',.3)->errorCorrection('H')->generate($info, '../public/QRCodes/'.$fileName.'.png');
             $dst_path = 'QRCodes/'.$fileName.'.png';
             $img = imagecreatefromstring(file_get_contents($dst_path));
@@ -105,11 +105,16 @@ class PassService
 //        $public_path = 'QRCodes/';
 //        $arr = glob(public_path($public_path));
 //        $zipper->make(public_path('zips/QRcodes.zip'))->add($arr)->close();
-        $public_path = 'QRCodes\\';
+        $public_path = 'QRCodes/';
         $arr = array();
         $arr[0] = null;
         $arr = glob(public_path($public_path));
+        if(isset($arr[0]))
         self::zipDir($arr[0],'zips/QRcodes.zip');
+        else
+        {
+            return public_path($public_path);
+        }
 
 
         self::madePasses($ids);
@@ -127,8 +132,8 @@ class PassService
                     if(in_array($file,['.','..',])) continue; //无效文件，重来
                     $file = iconv('gbk','utf-8',$file);
                     $extension = strchr($file,'.');
-                    rename(iconv('UTF-8','GBK',$basePath.'\\'.$file), iconv('UTF-8','GBK',$basePath.'\\'.$fileNum.$extension));
-                    $zip->addFile($basePath.'\\'.$fileNum.$extension,$fileNum.$extension);
+                    rename(iconv('UTF-8','GBK',$basePath.'/'.$file), iconv('UTF-8','GBK',$basePath.'/'.$fileNum.$extension));
+                    $zip->addFile($basePath.'/'.$fileNum.$extension,$fileNum.$extension);
                     $zip->renameName($fileNum.$extension,$file);
                     $fileArr[$fileNum.$extension] = $file;
                     $fileNum++;
@@ -136,7 +141,7 @@ class PassService
                 $zip->close();
                 closedir($dh);
                 foreach($fileArr as $k=>$v){
-                    rename(iconv('UTF-8','GBK',$basePath.'\\'.$k), iconv('UTF-8','GBK',$basePath.'\\'.$v));
+                    rename(iconv('UTF-8','GBK',$basePath.'/'.$k), iconv('UTF-8','GBK',$basePath.'/'.$v));
                 }
             }
         }
