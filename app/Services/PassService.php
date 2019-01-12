@@ -48,6 +48,12 @@ class PassService
         return $car;
     }
 
+    public function getInfoByLike($carNumber)
+    {
+        $car = DB::table('passes')->select('id','name','department','car_number','phone','status')->where('car_number','like','%'.$carNumber.'%')->get();
+        return $car;
+    }
+
     public function examine($ids)
     {
         foreach ($ids as $id)

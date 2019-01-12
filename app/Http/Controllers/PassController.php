@@ -103,7 +103,7 @@ class PassController extends Controller
         if (sizeof($data) == 0)
         {
             return response([
-                'code'  =>  2001,
+                'code'  =>  2002,
                 'message'   =>  '车牌未提交申请'
             ]);
         }
@@ -115,6 +115,24 @@ class PassController extends Controller
             ]);
         }
 
+    }
+    public function getInfoByLike(string $carNumber)
+    {
+        $data = $this->passService->getInfoByLike($carNumber);
+        if (sizeof($data) == 0)
+        {
+            return response([
+                'code'  =>  2002,
+                'message'   =>  '车牌未提交申请'
+            ]);
+        }
+        else
+        {
+            return response([
+                'code'  =>  0,
+                'data'  =>  $data
+            ]);
+        }
     }
 
     public function getQRCode(Request $request)

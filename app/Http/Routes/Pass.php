@@ -29,6 +29,7 @@ Route::group([
     ],function(){
         Route::post('search','PassController@getInfoByCarNumber');
         Route::post('getQRcode','PassController@getQRCode');
+        Route::get('like/{carNumber}','PassController@getInfoByLike');
     });
 
 
