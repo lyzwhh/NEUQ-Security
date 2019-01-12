@@ -44,13 +44,13 @@ class PassService
 
     public function getInfoByCarNumber($carNumber)
     {
-        $car = DB::table('passes')->select('id','name','department','car_number','phone','status')->where('car_number',$carNumber)->get();
+        $car = DB::table('passes')->select('id','name','department','car_number','phone','status')->where('car_number',$carNumber)->where('status',1)->get();
         return $car;
     }
 
     public function getInfoByLike($carNumber)
     {
-        $car = DB::table('passes')->select('id','name','department','car_number','phone','status')->where('car_number','like','%'.$carNumber.'%')->get();
+        $car = DB::table('passes')->select('id','name','department','car_number','phone','status')->where('car_number','like','%'.$carNumber.'%')->where('status',1)->get();
         return $car;
     }
 

@@ -104,7 +104,7 @@ class PassController extends Controller
         {
             return response([
                 'code'  =>  2002,
-                'message'   =>  '车牌未提交申请'
+                'message'   =>  '非管理下的车牌'
             ]);
         }
         else
@@ -123,7 +123,7 @@ class PassController extends Controller
         {
             return response([
                 'code'  =>  2002,
-                'message'   =>  '车牌未提交申请'
+                'message'   =>  '非管理下的车牌'
             ]);
         }
         else
