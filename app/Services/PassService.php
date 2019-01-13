@@ -97,7 +97,7 @@ class PassService
             $info = $pass->car_number;
             $fileName = $pass->name.' '.$info;
             $fileName = iconv('UTF-8', 'GBK', $fileName);
-            QrCode::format('png')->encoding('UTF-8')->size(1000)->merge('/public/logo.png',.3)->errorCorrection('H')->generate($info, '../public/QRCodes/'.$fileName.'.png');
+            QrCode::format('png')->encoding('UTF-8')->size(1000)->merge('/public/logo.png',.3)->errorCorrection('H')->generate('1#'.$info, '../public/QRCodes/'.$fileName.'.png');
             $dst_path = 'QRCodes/'.$fileName.'.png';
             $img = imagecreatefromstring(file_get_contents($dst_path));
             $font = 'font/simhei.ttf';
