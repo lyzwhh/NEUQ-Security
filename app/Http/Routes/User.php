@@ -10,7 +10,7 @@ Route::group([
     'prefix' => 'user'
 ],function (){
     Route::post('register','UserController@register');
-    Route::post('loginweb','UserController@login')->middleware('auditor');
+    Route::post('loginweb','UserController@login');  //wen端需要登陆两种账号
     Route::post('loginapp','UserController@login')->middleware('scanner');
 
 });

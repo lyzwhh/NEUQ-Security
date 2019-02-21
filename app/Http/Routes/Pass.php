@@ -17,7 +17,6 @@ Route::group([
 
     Route::group([
         'middleware' => ['token','auditor']
-        //TODO : 测试
     ],function(){
         Route::post('examine','PassController@examine');
         Route::post('reject','PassController@deletePasses');

@@ -41,7 +41,7 @@ class TokenMiddleware
         {
             $userInfo = $this->tokenService->getUserByToken($request->header('token'));  //add id name role
 
-            //TODO : wrong &$ useless  , $request is a array
+            //能用，但是和表格传入的东西不在一个位置
             $request->user = $userInfo;
             return $next($request);
         }

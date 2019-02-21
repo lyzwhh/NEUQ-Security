@@ -65,6 +65,7 @@ class UserController extends Controller
         }
         else
         {
+            $role = $this->userService->getUserRole($userId);
             $tokenStr = $this->tokenService->makeToken($userId);
             return response()->json([
                 'code'      =>  0,
@@ -72,6 +73,7 @@ class UserController extends Controller
                 'data'      =>  [
                     'user_id'   =>  $userId,
                     'tokenStr'  =>  $tokenStr,
+                    'role'      =>  $role,
                 ]
             ]);
         }
