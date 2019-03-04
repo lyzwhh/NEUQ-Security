@@ -135,9 +135,9 @@ class PassController extends Controller
         }
     }
 
-    public function getQRCode(Request $request)
+    public function getQRCode(string $ids)
     {
-        $data = $this->passService->getQRCode($request->ids);
+        $data = $this->passService->getQRCode(explode('+',$ids));
         $time = Carbon::now();
         $name = '二维码'.$time.'.zip';
         return response()->download($data,$name)->deleteFileAfterSend(true);
