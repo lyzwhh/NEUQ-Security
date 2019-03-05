@@ -66,7 +66,7 @@ class PassService
     {
         foreach ($ids as $id)
         {
-            DB::table('passes')->where('id',$id)->delete();
+            DB::table('passes')->where('id',$id)->update(['status'  =>  -1]);
         }
     }
 

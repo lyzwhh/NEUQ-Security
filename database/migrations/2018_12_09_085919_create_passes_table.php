@@ -20,7 +20,7 @@ class CreatePassesTable extends Migration
             $table->string('car_number');
             $table->string('phone');
             $table->string('relation');
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(0)->comment('0=未通过审核，1=通过审核，-1=已被删除');
             $table->string('made_date')->default('-1');
             $table->timestamps();
         });
