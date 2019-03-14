@@ -35,8 +35,8 @@ Route::group([
     Route::group([
         'middleware' => ['token']
     ],function(){
-        Route::get('getpasses/{limit}/{offset}','PassController@getPasses');
-        Route::get('getcheckedpasses/{limit}/{offset}','PassController@getCheckedPasses');
+        Route::get('getpasses','PassController@getPasses');
+        Route::get('getcheckedpasses','PassController@getCheckedPasses');
     });
 
 });

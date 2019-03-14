@@ -30,8 +30,7 @@ class PassController extends Controller
             'name' => $this->rule['name'],
             'department' => $this->rule['department'],
             'car_number' => $this->rule['car_number'],
-            'phone' => $this->rule['phone'],
-            'relation' => $this->rule['relation']
+            'phone' => $this->rule['phone']
         ]);
         $applyIfo = $request->all();
         $status = $this->passService->apply($applyIfo);
@@ -52,30 +51,25 @@ class PassController extends Controller
 
 
     }
-    public function getPasses(int $limit,int $offset)
+    public function getPasses()
     {
         $passes = $this->passTable
             ->select('id','name','department','car_number','phone','relation')
             ->orderBy('created_at')
-            ->offset($offset)
-            ->where('status',0)
-            ->limit($limit)
-            ->get();
+            ->paginate(10);
         return response([
             'code'  =>  '0',
             'data'  =>  $passes
         ]);
     }
 
-    public function getCheckedPasses(int $limit,int $offset)
+    public function getCheckedPasses()
     {
         $passes = $this->passTable
             ->select('id','name','department','car_number','phone','relation')
             ->orderBy('created_at')
-            ->offset($offset)
             ->where('status',1)
-            ->limit($limit)
-            ->get();
+            ->paginate(10);
         return response([
             'code'  =>  '0',
             'data'  =>  $passes
