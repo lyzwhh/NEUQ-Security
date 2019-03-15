@@ -79,4 +79,35 @@ class UserController extends Controller
         }
     }
 
+    public function getNormalScannerList()    //获取 '普通' 安保处人员列表
+    {
+        $list = $this->userService->getNormalScannerList();
+        return response()->json([
+            'code'  =>  0,
+            'data'  =>  $list
+        ]);
+    }
+
+    public function resetNormalScannerPassword(Request $request)
+    {
+        $this->validate($request,[
+            'password'  =>  $this->rule['password'],
+        ]);
+        $resetInfo = $request->all();
+        $role = $this->userService->getUserRole($resetInfo['id']);
+        if ($role != 1)
+        {
+            return response([
+                'code' =>304,
+                'message' => "无权重置该用户密码"
+            ]);
+        }
+        $this->userService->resetNormalScannerPassword($resetInfo);
+        $this->tokenService->updateToken($resetInfo['id']);
+        return response([
+            'code'  =>  0,
+            'messgae'   => '密码重置完成'
+        ]);
+    }
+
 }

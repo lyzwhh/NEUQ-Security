@@ -41,4 +41,26 @@ class UserService
         return $role;
     }
 
+    public function getNormalScannerList()
+    {
+        $list = DB::table('users')->where('role',1)->select('id')->get();     // 只能查看 '普通' 安保人员的账号
+        return $list;
+    }
+    public function updateUserInfo($userId, $userInfo)
+    {
+        $time = new Carbon();
+
+        $userInfo = array_merge($userInfo, [
+            'updated_at' => $time
+        ]);
+        DB::table('users')->where('id', $userId)->update($userInfo);
+        return true;
+    }
+
+    public function resetNormalScannerPassword($resetInfo)
+    {
+        $userInfo['password'] = bcrypt($resetInfo['password']);
+        self::updateUserInfo($resetInfo['id'],$userInfo);
+    }
+
 }

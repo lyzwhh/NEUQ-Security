@@ -26,7 +26,7 @@ class ScannerMiddleware
         {
             $role = $this->userService->getUserRole($request->id);
 
-            if ($role == 1)
+            if ($role < 100)  // 小于100安保处人员
             {
                 return $next($request);
             }
@@ -40,7 +40,7 @@ class ScannerMiddleware
         }
         else  //for operation
         {
-            if ($request->user->role == 1)
+            if ($request->user->role < 100)// 小于100安保处人员
             {
                 return $next($request);
             }

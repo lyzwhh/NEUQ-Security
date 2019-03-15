@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         'scanner' => \App\Http\Middleware\ScannerMiddleware::class,
+        'leader' => \App\Http\Middleware\ScannerLeaderMiddleware::class,
         'auditor' => \App\Http\Middleware\AuditorMiddleware::class,
         'token' => \App\Http\Middleware\TokenMiddleware::class,
 

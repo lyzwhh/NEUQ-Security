@@ -26,7 +26,7 @@ class AuditorMiddleware
         {
             $role = $this->userService->getUserRole($request->id);
 
-            if ($role == 0)
+            if ($role > 100)     // attention 1
             {
                 return $next($request);
             }
@@ -40,7 +40,7 @@ class AuditorMiddleware
         }
         else   //for operation
         {
-            if ($request->user->role == 0)
+            if ($request->user->role > 100)  //attention 2
             {
                 return $next($request);
             }

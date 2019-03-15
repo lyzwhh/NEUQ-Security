@@ -54,19 +54,19 @@ class PassService
         return $car;
     }
 
-    public function examine($ids)
+    public function examine($ids,$department)
     {
         foreach ($ids as $id)
         {
-            DB::table('passes')->where('id',$id)->update(['status'  =>  1]);
+            DB::table('passes')->where('department',$department)->where('id',$id)->update(['status'  =>  1]);
         }
     }
 
-    public function deletePasses($ids)
+    public function deletePasses($ids,$department)
     {
         foreach ($ids as $id)
         {
-            DB::table('passes')->where('id',$id)->update(['status'  =>  -1]);
+            DB::table('passes')->where('department',$department)->where('id',$id)->update(['status'  =>  -1]);
         }
     }
 

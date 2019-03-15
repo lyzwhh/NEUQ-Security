@@ -39,7 +39,7 @@ class TokenMiddleware
             ]);
         else
         {
-            $userInfo = $this->tokenService->getUserByToken($request->header('token'));  //add id name role
+            $userInfo = $this->tokenService->getUserByToken($request->header('token'));  //add id name role （department）
 
             //能用，但是和表格传入的东西不在一个位置
             $request->user = $userInfo;

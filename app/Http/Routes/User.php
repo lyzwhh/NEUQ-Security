@@ -13,4 +13,13 @@ Route::group([
     Route::post('loginweb','UserController@login');  //wen端需要登陆两种账号
     Route::post('loginapp','UserController@login')->middleware('scanner');
 
+
+    Route::group([
+        'middleware' => ['token','leader']
+    ],function(){
+//        Route::get('getNormalScannerList','UserController@getNormalScannerList');
+        Route::post('resetNormalScannerPassword','UserController@resetNormalScannerPassword');
+
+    });
+
 });

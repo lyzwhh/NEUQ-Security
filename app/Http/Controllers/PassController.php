@@ -51,10 +51,12 @@ class PassController extends Controller
 
 
     }
-    public function getPasses()
+    public function getPasses(Request  $request)
     {
         $passes = $this->passTable
+            ->where('department',$request->user->department)
             ->select('id','name','department','car_number','phone','relation')
+            ->where('status',0)
             ->orderBy('created_at')
             ->paginate(10);
         return response([
@@ -63,9 +65,10 @@ class PassController extends Controller
         ]);
     }
 
-    public function getCheckedPasses()
+    public function getCheckedPasses(Request $request)
     {
         $passes = $this->passTable
+            ->where('department',$request->user->department)
             ->select('id','name','department','car_number','phone','relation')
             ->orderBy('created_at')
             ->where('status',1)
@@ -78,14 +81,14 @@ class PassController extends Controller
 
     public function examine(Request $request)
     {
-        $this->passService->examine($request->ids);
+        $this->passService->examine($request->ids,$request->user->department);
         return response([
             'code'  =>  0
         ]);
     }
     public function deletePasses(Request $request)
     {
-        $this->passService->deletePasses($request->ids);
+        $this->passService->deletePasses($request->ids,$request->user->department);
         return response([
             'code'  =>  0
         ]);
