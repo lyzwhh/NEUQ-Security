@@ -17,7 +17,7 @@ Route::group([
     Route::group([
         'middleware' => ['token','leader']
     ],function(){
-//        Route::get('getNormalScannerList','UserController@getNormalScannerList');
+        Route::get('getNormalScannerList','UserController@getNormalScannerList');
         Route::post('resetNormalScannerPassword','UserController@resetNormalScannerPassword');
 
     });
