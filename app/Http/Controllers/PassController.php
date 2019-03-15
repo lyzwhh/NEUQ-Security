@@ -53,12 +53,24 @@ class PassController extends Controller
     }
     public function getPasses(Request  $request)
     {
-        $passes = $this->passTable
-            ->where('department',$request->user->department)
-            ->select('id','name','department','car_number','phone','relation')
-            ->where('status',0)
-            ->orderBy('created_at')
-            ->paginate(10);
+        if ($request->user->role < 100)     //scanner
+        {
+            $passes = $this->passTable
+                ->select('id','name','department','car_number','phone','relation')
+                ->where('status',0)
+                ->orderBy('created_at')
+                ->paginate(10);
+
+        }
+        else
+        {
+            $passes = $this->passTable
+                ->where('department',$request->user->department)        //  部门
+                ->select('id','name','department','car_number','phone','relation')
+                ->where('status',0)
+                ->orderBy('created_at')
+                ->paginate(10);
+        }
         return response([
             'code'  =>  '0',
             'data'  =>  $passes
@@ -67,12 +79,24 @@ class PassController extends Controller
 
     public function getCheckedPasses(Request $request)
     {
-        $passes = $this->passTable
-            ->where('department',$request->user->department)
-            ->select('id','name','department','car_number','phone','relation')
-            ->orderBy('created_at')
-            ->where('status',1)
-            ->paginate(10);
+
+        if ($request->user->role < 100)     //scanner
+        {
+            $passes = $this->passTable
+                ->select('id','name','department','car_number','phone','relation')
+                ->orderBy('created_at')
+                ->where('status',1)
+                ->paginate(10);
+        }
+        else
+        {
+            $passes = $this->passTable
+                ->where('department',$request->user->department)        //  部门
+                ->select('id','name','department','car_number','phone','relation')
+                ->orderBy('created_at')
+                ->where('status',1)
+                ->paginate(10);
+        }
         return response([
             'code'  =>  '0',
             'data'  =>  $passes
