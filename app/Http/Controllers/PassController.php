@@ -71,6 +71,11 @@ class PassController extends Controller
                 ->orderBy('created_at')
                 ->paginate(10);
         }
+        foreach ($passes as $pass)
+        {
+            $pass->key=$pass->id;
+            unset($pass->id);
+        }
         return response([
             'code'  =>  '0',
             'data'  =>  $passes
@@ -97,6 +102,13 @@ class PassController extends Controller
                 ->where('status',1)
                 ->paginate(10);
         }
+
+        foreach ($passes as $pass)
+        {
+            $pass->key=$pass->id;
+            unset($pass->id);
+        }
+
         return response([
             'code'  =>  '0',
             'data'  =>  $passes
