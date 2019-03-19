@@ -58,7 +58,7 @@ class PassController extends Controller
             $passes = $this->passTable
                 ->select('id','name','department','car_number','phone','relation')
                 ->where('status',0)
-                ->orderBy('created_at')
+                ->orderBy('id', 'desc')
                 ->paginate(10);
 
         }
@@ -68,12 +68,12 @@ class PassController extends Controller
                 ->where('department',$request->user->department)        //  部门
                 ->select('id','name','department','car_number','phone','relation')
                 ->where('status',0)
-                ->orderBy('created_at')
+                ->orderBy('id', 'desc')
                 ->paginate(10);
         }
         foreach ($passes as $pass)
         {
-            $pass->key=$pass->id;
+            $pass->key = $pass->id;
             unset($pass->id);
         }
         return response([
@@ -89,7 +89,7 @@ class PassController extends Controller
         {
             $passes = $this->passTable
                 ->select('id','name','department','car_number','phone','relation')
-                ->orderBy('created_at')
+                ->orderBy('id', 'desc')
                 ->where('status',1)
                 ->paginate(10);
         }
@@ -98,14 +98,35 @@ class PassController extends Controller
             $passes = $this->passTable
                 ->where('department',$request->user->department)        //  部门
                 ->select('id','name','department','car_number','phone','relation')
-                ->orderBy('created_at')
+                ->orderBy('id', 'desc')
                 ->where('status',1)
                 ->paginate(10);
         }
 
         foreach ($passes as $pass)
         {
-            $pass->key=$pass->id;
+            $pass->key = $pass->id;
+            unset($pass->id);
+        }
+
+        return response([
+            'code'  =>  '0',
+            'data'  =>  $passes
+        ]);
+    }
+
+    public function getMadePasses(Request $request)
+{
+        $passes = $this->passTable
+            ->select('id','name','department','car_number','phone','relation','made_date')
+            ->where('status',1)
+            ->where('made_date','<>',-1)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        foreach ($passes as $pass)
+        {
+            $pass->key = $pass->id;
             unset($pass->id);
         }
 

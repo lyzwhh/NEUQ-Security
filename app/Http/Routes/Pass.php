@@ -29,6 +29,7 @@ Route::group([
         Route::post('search','PassController@getInfoByCarNumber');
         Route::get('getQRcode/{ids}','PassController@getQRCode');
         Route::get('like/{carNumber}','PassController@getInfoByLike');
+        Route::get('getmadepasses','PassController@getMadePasses');
     });
 
 
@@ -37,6 +38,7 @@ Route::group([
     ],function(){
         Route::get('getpasses','PassController@getPasses');
         Route::get('getcheckedpasses','PassController@getCheckedPasses');
+
     });
 
 });
