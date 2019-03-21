@@ -136,6 +136,27 @@ class PassController extends Controller
         ]);
     }
 
+    public function getUnmadePasses(Request $request)
+    {
+        $passes = $this->passTable
+            ->select('id','name','department','car_number','phone','relation','made_date')
+            ->where('status',1)
+            ->where('made_date',-1)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        foreach ($passes as $pass)
+        {
+            $pass->key = $pass->id;
+            unset($pass->id);
+        }
+
+        return response([
+            'code'  =>  '0',
+            'data'  =>  $passes
+        ]);
+    }
+
     public function examine(Request $request)
     {
         $this->passService->examine($request->ids,$request->user->department);

@@ -30,6 +30,7 @@ Route::group([
         Route::get('getQRcode/{ids}','PassController@getQRCode');
         Route::get('like/{carNumber}','PassController@getInfoByLike');
         Route::get('getmadepasses','PassController@getMadePasses');
+        Route::get('getunmadepasses','PassController@getUnmadePasses');
     });
 
 
