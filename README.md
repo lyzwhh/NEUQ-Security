@@ -1,3 +1,8 @@
+# 东大安保
+### 根据各院系管理教师职工车辆难点、安保处联系车主困难的状况，为两个人群提供web端和app端的解决方案。web端供申请通行证的教师职工和批审通行证的各院系部门使用。app端为安保处使用，保证车主信息不被无关外人知道的同时安保处人员能便捷的查询车主信息，进行管理和呼叫挪车。
+#### 接口：http://leaf.elatis.cn/api/doc/114#header-1297
+
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
